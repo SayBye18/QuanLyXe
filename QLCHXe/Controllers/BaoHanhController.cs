@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,16 +12,16 @@ namespace QLCHXe.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NhanVienController : ControllerBase
+    public class BaoHanhController: ControllerBase
     {
-        private readonly INhanVienRepo repo;
-        public NhanVienController(INhanVienRepo nhanvienRepo)
+        private readonly IBaoHanhRepo repo;
+        public BaoHanhController(IBaoHanhRepo baohanhRepo)
         {
-            repo = nhanvienRepo;
+            repo = baohanhRepo;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<NhanVienDTO>>> GetAll()
+        public async Task<ActionResult<List<BaoHanhDTO>>> GetAll()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace QLCHXe.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<NhanVienDTO>> GetById(Guid id)
+        public async Task<ActionResult<BaoHanhDTO>> GetById(Guid id)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace QLCHXe.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult<NhanVienDTO>> Insert(NhanVien obj)
+        public async Task<ActionResult<BaoHanhDTO>> Insert(BaoHanh obj)
          {
              try
             {
@@ -71,7 +71,7 @@ namespace QLCHXe.Controllers
 
         }
         [HttpPut]
-        public async Task<ActionResult<bool>> Update(NhanVien obj)
+        public async Task<ActionResult<bool>> Update(BaoHanh obj)
          {
              try
             {

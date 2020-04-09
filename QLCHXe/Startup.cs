@@ -33,6 +33,22 @@ namespace QLCHXe
 
             services.AddTransient<INhanVienRepo, NhanVienRepo>();
 
+            services.AddTransient<IAccountRepo,AccountRepo>();
+
+            services.AddTransient<IBaoHanhRepo,BaoHanhRepo>();
+
+            services.AddTransient<IHdnRepo,HdnRepo>();
+
+            services.AddTransient<IKhachHangRepo,KhachHangRepo>();
+
+            services.AddTransient<IKhoRepo,KhoRepo>();
+
+            services.AddTransient<ILoaiXeRepo,LoaiXeRepo>();
+
+            services.AddTransient<INccRepo,NccRepo>();
+
+            services.AddTransient<IXeRepo,XeRepo>();
+
             // DI của dbComtext
             services.AddDbContext<QLCHXeContext>(
                 opt => opt.UseSqlServer(Configuration.GetConnectionString("quanlyxe"))

@@ -9,6 +9,14 @@ namespace QLCHXe.Mapper
         public MappingProfile()
         {
             CreateMap<NhanVien, NhanVienDTO>();
+            CreateMap<Acccount,AccountDTO>();
+            CreateMap<BaoHanh,BaoHanhDTO>();
+            CreateMap<Hdn,HdnDTO>();
+            CreateMap<KhachHang,KhachHangDTO>();
+            CreateMap<Kho,KhoDTO>();
+            CreateMap<LoaiXe,LoaiXeDTO>();
+            CreateMap<Ncc,NccDTO>();
+            CreateMap<Xe,XeDTO>();
             
         }
     }
