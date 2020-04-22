@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,29 +26,38 @@ namespace QLCHXe
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
-           
+
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CrosPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                });
+            });
+
 
             // DI automapper
             services.AddAutoMapper(typeof(Startup));
 
             services.AddTransient<INhanVienRepo, NhanVienRepo>();
 
-            services.AddTransient<IAccountRepo,AccountRepo>();
+            services.AddTransient<IAccountRepo, AccountRepo>();
 
-            services.AddTransient<IBaoHanhRepo,BaoHanhRepo>();
+            services.AddTransient<IBaoHanhRepo, BaoHanhRepo>();
 
-            services.AddTransient<IHdnRepo,HdnRepo>();
+            services.AddTransient<IHdnRepo, HdnRepo>();
 
-            services.AddTransient<IKhachHangRepo,KhachHangRepo>();
+            services.AddTransient<IHdxRepo, HdxRepo>();
 
-            services.AddTransient<IKhoRepo,KhoRepo>();
+            services.AddTransient<IKhachHangRepo, KhachHangRepo>();
 
-            services.AddTransient<ILoaiXeRepo,LoaiXeRepo>();
+            services.AddTransient<IKhoRepo, KhoRepo>();
 
-            services.AddTransient<INccRepo,NccRepo>();
+            services.AddTransient<ILoaiXeRepo, LoaiXeRepo>();
 
-            services.AddTransient<IXeRepo,XeRepo>();
+            services.AddTransient<INccRepo, NccRepo>();
+
+            services.AddTransient<IXeRepo, XeRepo>();
 
             // DI của dbComtext
             services.AddDbContext<QLCHXeContext>(
@@ -62,6 +72,12 @@ namespace QLCHXe
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
+
+            app.UseCors("CrosPolicy");
 
             app.UseHttpsRedirection();
 
@@ -69,10 +85,17 @@ namespace QLCHXe
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("MVC didn't find anything!");
+            });
+
         }
     }
 }

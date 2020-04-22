@@ -5,7 +5,7 @@ using QLCHXe.ViewModels;
 
 namespace QLCHXe.Repository.Implement
 {
-   public class HdxRepo: RepoBase<Hdn,HdnDTO>, IHdnRepo
+   public class HdxRepo: RepoBase<Hdx,HdxDTO>, IHdxRepo
     {
         public HdxRepo (IServiceProvider serviceProvider) : base(serviceProvider)
         {
